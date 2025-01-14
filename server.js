@@ -15,8 +15,8 @@ await connectDB();
 // Configure CORS middleware
 app.use(
   cors({
-    origin: "https://khabartalash15.netlify.app/", // Allow requests from this origin
-    credentials: true, // Allow cookies to be sent along with requests
+    origin: "*", // Allow requests from any origin
+    credentials: true, // This won't work with '*' for credentials
   })
 );
 
