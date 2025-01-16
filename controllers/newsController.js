@@ -56,8 +56,11 @@ const getPaginatedNews = async (req, res) => {
       query.category = category;
     }
 
-    // Fetch the filtered news based on query
-    const newsList = await News.find(query).skip(skip).limit(limitNumber);
+    // Fetch the filtered news based on query, sorted by latest first
+    const newsList = await News.find(query)
+      .sort({ createdAt: -1 }) // Sort by createdAt in descending order
+      .skip(skip)
+      .limit(limitNumber);
 
     // Count the total number of news items matching the query
     const totalNews = await News.countDocuments(query);

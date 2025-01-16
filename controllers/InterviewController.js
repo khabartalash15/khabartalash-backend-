@@ -47,7 +47,11 @@ const getPaginatedInterviews = async (req, res) => {
 
     const skip = (pageNumber - 1) * limitNumber;
 
-    const interviewList = await Interview.find().skip(skip).limit(limitNumber);
+    // Fetch interviews sorted by the latest createdAt
+    const interviewList = await Interview.find()
+      .sort({ createdAt: -1 }) // Sort by createdAt in descending order
+      .skip(skip)
+      .limit(limitNumber);
 
     const totalInterviews = await Interview.countDocuments();
 
